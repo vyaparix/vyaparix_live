@@ -107,7 +107,7 @@ export default function ThankYouView({ lead, onGoBack }: ThankYouViewProps) {
                       : "Download started successfully!"}
                   </h4>
                   <p className="text-slate-500 text-xs mt-0.5">
-                    File: <span className="font-mono bg-slate-200/60 px-1 py-0.5 rounded text-[11px]">Vyaparix_Setup.exe</span> (approx. 24 MB)
+                    File: <span className="font-mono bg-slate-200/60 px-1 py-0.5 rounded text-[11px]">Vyaparix_Setup.exe</span> (approx. 1GB)
                   </p>
                 </div>
               </div>
