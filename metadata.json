@@ -1,0 +1,6 @@
+{
+  "name": "Vyaparix GST Billing & Inventory",
+  "description": "Modern GST Billing, Inventory Management, WhatsApp Invoicing and Business Analytics Software for Indian Businesses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
