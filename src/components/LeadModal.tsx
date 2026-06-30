@@ -78,21 +78,10 @@ export default function LeadModal({ isOpen, onClose, onSuccess }: LeadModalProps
       submittedAt: new Date().toISOString()
     };
 
-    // 1. Save to custom local storage as baseline log
-    try {
-      const existingLeadsStr = localStorage.getItem("vyaparix_leads") || "[]";
-      const existingLeads = JSON.parse(existingLeadsStr);
-      existingLeads.push(submissionLead);
-      localStorage.setItem("vyaparix_leads", JSON.stringify(existingLeads));
-    } catch (lsErr) {
-      console.error("Could not sync to local storage:", lsErr);
-    }
-
-    // 2. Safely perform POST request directly to Google Apps Script webhook
-    const webhookUrl = (import.meta as any).env.VITE_GOOGLE_SHEET_WEBHOOK_URL || "https://script.google.com/macros/s/AKfycbxWIdDbr7VR-A0lHmabQcTCUzrkyJbbv8F0538iEOAwZO7qQwAfqBdomk8Xj51pQQAv/exec";
+    // POST to Google Apps Script webhook
+    const webhookUrl = (import.meta as any).env.VITE_GOOGLE_SHEET_WEBHOOK_URL;
     if (webhookUrl && webhookUrl.trim() !== "") {
       try {
-        // Use no-cors to prevent preflight CORS redirect failure from Google Sheets Web App endpoint
         await fetch(webhookUrl, {
           method: "POST",
           mode: "no-cors",
@@ -101,12 +90,9 @@ export default function LeadModal({ isOpen, onClose, onSuccess }: LeadModalProps
           },
           body: JSON.stringify(submissionLead),
         });
-        console.log("Form data sent to Google Sheet Web App!");
       } catch (webhookErr) {
-        console.warn("Failed sending to Sheets webhook. Check URL configuration.", webhookErr);
+        console.warn("Webhook POST failed:", webhookErr);
       }
-    } else {
-      console.log("Sheet webhook is empty. App is running in demo mode with Local Storage backup.");
     }
 
     // Show beautiful success confirmation

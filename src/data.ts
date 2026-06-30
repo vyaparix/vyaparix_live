@@ -206,7 +206,6 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
     businessName: "Medical Store, Ahmedabad",
     rating: 5,
     text: "Switched to Vyaparix for our medical retail store, and it completely streamlined our pharmacy bills. The batch-wise stock alert tells us exactly which medicines are expiring next month. Saved more than ₹25,000 in expired losses already. Best billing software in India!",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=facearea&facepad=2&w=256&h=256&q=80",
   },
   {
     id: 2,
@@ -215,7 +214,6 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
     businessName: "Apparel Outlet, Mumbai",
     rating: 5,
     text: "Managing multiple dress size variants used to be a nightmare on spreadsheets. Vyaparix custom sizing matrices let us list stocks easily. With quick item lookup, the checkout flows instantly. Standard WhatsApp invoices mean customers love sharing bills!",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=facearea&facepad=2&w=256&h=256&q=80",
   },
   {
     id: 3,
@@ -224,7 +222,6 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
     businessName: "Hardware & Sanitary, Amritsar",
     rating: 5,
     text: "Double-unit billing in Vyaparix is outstanding. We sell paints by Litres and rods by Weight or Pieces, and Vyaparix adjusts both perfectly. Automated supplier dues tracking saved us endless ledger crosschecking. Highly recommend the one-time purchase option!",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=facearea&facepad=2&w=256&h=256&q=80",
   },
   {
     id: 4,
@@ -233,6 +230,5 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
     businessName: "Smart Electronics Shop, Pune",
     rating: 5,
     text: "Brilliant serial and IMEI tracking. For electronic devices, tracing warranty was very clumsy, but with Vyaparix we just enter the serial number and print the invoice. Tax calculation is 100% accurate, helping our CA complete GST filings in minutes.",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fit=facearea&facepad=2&w=256&h=256&q=80",
   },
 ];

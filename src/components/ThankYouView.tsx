@@ -12,29 +12,15 @@ export default function ThankYouView({ lead, onGoBack }: ThankYouViewProps) {
   const [downloadCounter, setDownloadCounter] = useState(5);
   const [downloadTriggered, setDownloadTriggered] = useState(false);
 
-  // Trigger download action
   const triggerDownload = () => {
     try {
       const configuredUrl = (import.meta as any).env.VITE_EXE_DOWNLOAD_URL;
       if (configuredUrl && configuredUrl.trim() !== "") {
-        // Redirect or open the external cloud storage 1GB link
         window.open(configuredUrl.trim(), "_blank");
-        setDownloadTriggered(true);
-      } else {
-        // Create a dummy executable blob and download it to make it a fully real user action
-        const data = new Blob(["VYAPARIX_EXE_SETUP_DUMMY_STREAM_DATA"], { type: "application/octet-stream" });
-        const url = window.URL.createObjectURL(data);
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "Vyaparix_Setup.exe");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
         setDownloadTriggered(true);
       }
     } catch (err) {
-      console.error("Failed to trigger installer download:", err);
+      console.error("Download failed:", err);
     }
   };
 

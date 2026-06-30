@@ -137,18 +137,8 @@ export default function App() {
       submittedAt: new Date().toISOString()
     };
 
-    // 1. Save to local storage
-    try {
-      const existingLeadsStr = localStorage.getItem("vyaparix_leads") || "[]";
-      const existingLeads = JSON.parse(existingLeadsStr);
-      existingLeads.push(submissionLead);
-      localStorage.setItem("vyaparix_leads", JSON.stringify(existingLeads));
-    } catch (lsErr) {
-      console.error("Could not sync footer lead to local storage:", lsErr);
-    }
-
-    // 2. Post to Google Apps Script webhook
-    const webhookUrl = (import.meta as any).env.VITE_GOOGLE_SHEET_WEBHOOK_URL || "https://script.google.com/macros/s/AKfycbxWIdDbr7VR-A0lHmabQcTCUzrkyJbbv8F0538iEOAwZO7qQwAfqBdomk8Xj51pQQAv/exec";
+    // Post to Google Apps Script webhook
+    const webhookUrl = (import.meta as any).env.VITE_GOOGLE_SHEET_WEBHOOK_URL;
     if (webhookUrl && webhookUrl.trim() !== "") {
       try {
         await fetch(webhookUrl, {
@@ -159,9 +149,8 @@ export default function App() {
           },
           body: JSON.stringify(submissionLead),
         });
-        console.log("Footer inquiry sent to Google Sheet Web App!");
       } catch (webhookErr) {
-        console.warn("Failed sending footer inquiry to Sheets webhook:", webhookErr);
+        console.warn("Webhook POST failed:", webhookErr);
       }
     }
 
@@ -1079,11 +1068,17 @@ export default function App() {
             {/* Author details */}
             <div className="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-slate-200/60">
               <div className="flex items-center gap-4">
-                <img 
-                  src={TESTIMONIALS_DATA[activeTestimonial].avatar} 
-                  alt={TESTIMONIALS_DATA[activeTestimonial].name} 
-                  className="w-12 h-12 rounded-full object-cover border border-slate-200"
-                />
+                {TESTIMONIALS_DATA[activeTestimonial].avatar ? (
+                  <img 
+                    src={TESTIMONIALS_DATA[activeTestimonial].avatar} 
+                    alt={TESTIMONIALS_DATA[activeTestimonial].name} 
+                    className="w-12 h-12 rounded-full object-cover border border-slate-200"
+                  />
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-indigo-100 border border-indigo-200 flex items-center justify-center shrink-0">
+                    <img src={IMAGES.logo} alt="Vyaparix" className="w-7 h-7 object-contain" />
+                  </div>
+                )}
                 <div>
                   <h4 className="font-bold text-slate-800 text-sm font-display">
                     {TESTIMONIALS_DATA[activeTestimonial].name}

@@ -25,7 +25,7 @@ export interface TestimonialItem {
   businessName: string;
   rating: number;
   text: string;
-  avatar: string;
+  avatar?: string;
 }
 
 export interface FeatureItem {
