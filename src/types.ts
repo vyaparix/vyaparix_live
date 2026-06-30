@@ -6,6 +6,10 @@ export interface LeadDetails {
   businessType: string;
   city: string;
   state: string;
+  plan?: string;
+  amount?: number;
+  paymentId?: string;
+  orderId?: string;
   submittedAt: string;
 }
 

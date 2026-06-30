@@ -20,7 +20,7 @@ export const TRUST_STATS = [
 export const FEATURES_DATA: FeatureItem[] = [
   {
     title: "GST Billing",
-    description: "Generate beautiful, GST-compliant tax invoices in less than 5 seconds. Supports CGST, SGST, IGST, UTGST, and composition billing schemes.",
+    description: "Generate beautiful, GST-compliant tax invoices in less than 5 seconds. Supports CGST, SGST,HSN  and composition billing schemes.",
     iconName: "ReceiptText",
     badge: "GST compliant",
   },
@@ -69,12 +69,12 @@ export const FEATURES_DATA: FeatureItem[] = [
   },
   {
     title: "Invoice Printing",
-    description: "Print professional invoices on A4 size pages in both portrait and landscape orientation. Also supports A5 and continuous thermal roll paper (2-inch, 3-inch).",
+    description: "Print professional invoices on A4 size pages in both portrait and landscape orientation. Also supports thermal roll paper.",
     iconName: "Printer",
   },
   {
     title: "Business Analytics",
-    description: "Gain deep insights with customizable visual dashboards showing tax summaries, top-selling items, cash flow, and client balances.",
+    description: "Gain deep insights with customizable visual dashboards showing tax summaries, top10-selling items, cash flow, and client balances.",
     iconName: "BarChart3",
   },
   {

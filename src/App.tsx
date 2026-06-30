@@ -50,8 +50,10 @@ import {
 } from "./data";
 import { LeadDetails } from "./types";
 import LeadModal, { INDIAN_STATES, BUSINESS_TYPES } from "./components/LeadModal";
+
 import ThankYouView from "./components/ThankYouView";
 import ScrollReveal from "./components/ScrollReveal";
+import PricingSection from "./components/PricingSection";
 import { motion, AnimatePresence } from "motion/react";
 import { IMAGES } from "./imageConfig";
 
@@ -61,8 +63,8 @@ export default function App() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
-  // Interactive Showcase Device State
-  const [activeDevice, setActiveDevice] = useState<"laptop" | "desktop" | "tablet" | "mobile">("laptop");
+  // Interactive Showcase Feature State
+  const [selectedFeatureIdx, setSelectedFeatureIdx] = useState(0);
   
   // Interactive FAQ State
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -216,6 +218,30 @@ export default function App() {
       case "BarChart3": return <BarChart3 className={className} />;
       case "Award": return <Award className={className} />;
       default: return <ReceiptText className={className} />;
+    }
+  };
+
+  const featureDeviceMap = (idx: number): "laptop" | "desktop" | "tablet" | "mobile" => {
+    const title = FEATURES_DATA[idx]?.title;
+    switch (title) {
+      case "GST Billing":
+      case "Invoice Printing":
+      case "Purchase Management":
+      case "Custom Branding":
+        return "desktop";
+      case "Inventory Management":
+      case "Stock Alerts":
+      case "Cloud Backup":
+      case "Business Analytics":
+      case "Sales Reports":
+        return "laptop";
+      case "Customer Ledger":
+      case "Supplier Ledger":
+        return "tablet";
+      case "WhatsApp Automation":
+        return "mobile";
+      default:
+        return "laptop";
     }
   };
 
@@ -692,7 +718,7 @@ export default function App() {
       </section>
 
 
-      {/* DASHBOARD SHOWCASE (Laptop, Desktop, Tablet, & Mobile Mockups) */}
+      {/* INTERACTIVE PRODUCT SHOWCASE — Feature Tabs + Device Mockup */}
       <section id="showcase" className="py-20 md:py-28 bg-slate-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 dot-grid-dark pointer-events-none" />
         
@@ -707,151 +733,162 @@ export default function App() {
                 Interactive Product Showcase
               </h2>
               <p className="text-slate-400 mt-2 text-sm sm:text-base">
-                Examine our real software interfaces. Explore the Shop Dashboard, the complex Billing Studio workbench, and modern aesthetic printed bills.
+                Click any feature below to see the relevant interface in action.
               </p>
             </div>
           </ScrollReveal>
 
-          {/* Showcase Switcher tabs */}
-          <ScrollReveal direction="up" delay={0.12} duration={0.6}>
-            <div className="flex justify-center gap-2 mb-12 max-w-sm sm:max-w-md mx-auto p-1.5 bg-slate-800/80 rounded-2xl border border-slate-700/60 select-none">
-              <button 
-                onClick={() => setActiveDevice("laptop")}
-                className={`flex-1 py-2 rounded-xl text-xs sm:text-sm font-semibold font-display transition-all ${
-                  activeDevice === "laptop" 
-                    ? "bg-indigo-600 text-white shadow-md" 
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                Laptop View
-              </button>
-              <button 
-                onClick={() => setActiveDevice("desktop")}
-                className={`flex-1 py-2 rounded-xl text-xs sm:text-sm font-semibold font-display transition-all ${
-                  activeDevice === "desktop" 
-                    ? "bg-indigo-600 text-white shadow-md" 
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                Billing Studio
-              </button>
-              <button 
-                onClick={() => setActiveDevice("tablet")}
-                className={`flex-1 py-2 rounded-xl text-xs sm:text-sm font-semibold font-display transition-all ${
-                  activeDevice === "tablet" 
-                    ? "bg-indigo-600 text-white shadow-md" 
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                Tablet View
-              </button>
-              <button 
-                onClick={() => setActiveDevice("mobile")}
-                className={`flex-1 py-2 rounded-xl text-xs sm:text-sm font-semibold font-display transition-all ${
-                  activeDevice === "mobile" 
-                    ? "bg-indigo-600 text-white shadow-md" 
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                Invoice PDF
-              </button>
-            </div>
-          </ScrollReveal>
-
-          {/* Screen Display Container */}
-          <div className="flex justify-center max-w-5xl mx-auto items-center">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
             
-            {/* 1. LAPTOP MOCKUP (Showcases Image 1: Shop Overview) */}
-            {activeDevice === "laptop" && (
-              <div className="relative w-full max-w-4xl">
-                <div className="bg-slate-950 p-2 sm:p-3 rounded-2xl shadow-2xl border border-slate-700">
-                  <div className="aspect-[16/10] bg-slate-800 rounded-lg overflow-hidden relative">
-                    <img 
-                      src={IMAGES.dashboard} 
-                      alt="Shop Overview Laptop Display" 
-                      className="w-full h-full object-fill" 
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </div>
-                {/* Hinge & Chassis Base details for ultra realism */}
-                <div className="h-4 w-[108%] -ml-[4%] bg-gradient-to-r from-slate-800 via-slate-600 to-slate-800 rounded-b-xl border-b-2 border-slate-950 relative z-10" />
-                <div className="h-2 w-[24%] mx-auto bg-slate-700 rounded-b-md shadow-inner" />
-              </div>
-            )}
-
-            {/* 2. DESKTOP / MONITOR MOCKUP (Showcases Image 2: Billing Studio) */}
-            {activeDevice === "desktop" && (
-              <div className="relative w-full max-w-4xl flex flex-col items-center">
-                <div className="bg-slate-950 p-2 rounded-xl shadow-2xl border border-slate-700 w-full">
-                  <div className="aspect-[16/9] bg-slate-800 rounded-lg overflow-hidden relative">
-                    <img 
-                      src={IMAGES.billing} 
-                      alt="Billing Studio Workbench" 
-                      className="w-full h-full object-cover" 
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </div>
-                {/* Monitor Stand */}
-                <div className="w-16 h-12 bg-slate-700 border-x border-slate-600 -mt-0.5" />
-                <div className="w-48 h-2.5 bg-slate-800 rounded-t-lg shadow" />
-              </div>
-            )}
-
-            {/* 3. TABLET MOCKUP (Showcases Image 2: Billing Studio scaled inside a tablet bezel) */}
-            {activeDevice === "tablet" && (
-              <div className="relative w-full max-w-2xl flex justify-center">
-                <div className="bg-slate-950 p-4 rounded-[32px] w-[85%] aspect-[4/3] border-4 border-slate-800 shadow-2xl relative">
-                  <div className="absolute top-1/2 -left-1 w-1 h-12 bg-slate-700 rounded-r-md" /> {/* Button representation */}
-                  <div className="w-full h-full bg-slate-850 rounded-2xl overflow-hidden">
-                    <img 
-                      src={IMAGES.billing} 
-                      alt="Tablet billing" 
-                      className="w-full h-full object-cover" 
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
+            {/* LEFT COLUMN — Feature List */}
+            <ScrollReveal direction="left" delay={0.1} duration={0.6} className="w-full lg:w-[280px] xl:w-[320px] shrink-0">
+              <div className="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-2 max-h-[520px] overflow-y-auto custom-scrollbar">
+                <div className="space-y-1">
+                  {FEATURES_DATA.map((feat, idx) => (
+                    <button
+                      key={feat.title}
+                      onClick={() => setSelectedFeatureIdx(idx)}
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-200 ${
+                        selectedFeatureIdx === idx
+                          ? "bg-indigo-600/20 border border-indigo-500/40 shadow-md"
+                          : "bg-transparent border border-transparent hover:bg-slate-700/50"
+                      }`}
+                    >
+                      <span className={`shrink-0 p-1.5 rounded-lg transition-colors ${
+                        selectedFeatureIdx === idx
+                          ? "bg-indigo-500 text-white"
+                          : "bg-slate-700 text-slate-400"
+                      }`}>
+                        {getFeatureIcon(feat.iconName, "w-4 h-4")}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <span className={`text-sm font-semibold font-display block truncate transition-colors ${
+                          selectedFeatureIdx === idx ? "text-white" : "text-slate-300"
+                        }`}>
+                          {feat.title}
+                        </span>
+                      </div>
+                      {feat.badge && (
+                        <span className="text-[9px] font-bold font-mono tracking-wider px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 uppercase shrink-0">
+                          {feat.badge}
+                        </span>
+                      )}
+                    </button>
+                  ))}
                 </div>
               </div>
-            )}
+            </ScrollReveal>
 
-            {/* 4. MOBILE / PRINT SHOWCASE (Showcases Image 3: Real Invoice view) */}
-            {activeDevice === "mobile" && (
-              <div className="relative w-full max-w-md flex justify-center">
-                <div className="bg-white text-slate-900 border border-slate-100 rounded-3xl p-3 shadow-2xl max-w-sm w-full">
-                  <div className="flex items-center justify-between px-3 py-2 border-b border-slate-100 mb-2">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2.5 h-2.5 bg-rose-500 rounded-full" />
-                      <span className="w-2.5 h-2.5 bg-amber-400 rounded-full" />
-                      <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full" />
+            {/* RIGHT COLUMN — Mockup Display + Caption */}
+            <div className="flex-1 min-w-0 w-full">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedFeatureIdx}
+                  initial={{ opacity: 0, x: 24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -24 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  {/* LAPTOP MOCKUP */}
+                  {featureDeviceMap(selectedFeatureIdx) === "laptop" && (
+                    <div className="w-full max-w-3xl mx-auto">
+                      <div className="bg-slate-950 p-2 sm:p-3 rounded-2xl shadow-2xl border border-slate-700">
+                        <div className="aspect-[16/10] bg-slate-800 rounded-lg overflow-hidden relative">
+                          <img 
+                            src={IMAGES.dashboard} 
+                            alt="Shop Overview" 
+                            className="w-full h-full object-fill" 
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                      </div>
+                      <div className="h-4 w-[104%] -ml-[2%] bg-gradient-to-r from-slate-800 via-slate-600 to-slate-800 rounded-b-xl border-b-2 border-slate-950 relative z-10" />
+                      <div className="h-2 w-[20%] mx-auto bg-slate-700 rounded-b-md shadow-inner" />
                     </div>
-                    <span className="text-[10px] font-bold font-mono tracking-wider text-slate-400 uppercase">INVOICE PRINT OUTLET</span>
-                    <a href={IMAGES.invoice} target="_blank" className="p-1 rounded-md text-slate-400 hover:text-indigo-600 transition-colors" rel="noreferrer">
-                      <ArrowUpRight className="w-4 h-4" />
-                    </a>
-                  </div>
-                  <div className="rounded-xl overflow-hidden border border-slate-200 aspect-[3/4]">
-                    <img 
-                      src={IMAGES.invoice} 
-                      alt="Invoice Format Print layout" 
-                      className="w-full h-full object-cover" 
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
+                  )}
 
-          </div>
+                  {/* DESKTOP / MONITOR MOCKUP */}
+                  {featureDeviceMap(selectedFeatureIdx) === "desktop" && (
+                    <div className="w-full max-w-3xl mx-auto flex flex-col items-center">
+                      <div className="bg-slate-950 p-2 rounded-xl shadow-2xl border border-slate-700 w-full">
+                        <div className="aspect-[16/9] bg-slate-800 rounded-lg overflow-hidden relative">
+                          <img 
+                            src={IMAGES.billing} 
+                            alt="Billing Studio Workbench" 
+                            className="w-full h-full object-cover" 
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                      </div>
+                      <div className="w-14 h-10 bg-slate-700 border-x border-slate-600 -mt-0.5" />
+                      <div className="w-44 h-2 bg-slate-800 rounded-t-lg shadow" />
+                    </div>
+                  )}
 
-          <div className="text-center mt-12 max-w-xl mx-auto">
-            <h4 className="font-semibold text-slate-300 text-sm">
-              {activeDevice === "laptop" && "✨ Beautiful, clear shop dashboards highlighting sales, outstandings, active stocks, and inventory trends at a glance!"}
-              {activeDevice === "desktop" && '✨ The Billing Studio workspace: generate compliant GST columns, calculate HSN codes, tax multipliers, and create invoices instantaneously!'}
-              {activeDevice === "tablet" && "✨ Compatible screen dynamics fit nicely on lightweight tablet displays, giving counter clerks fast billing accessibility!"}
-              {activeDevice === "mobile" && "✨ Premium aesthetic thermal & laser-friendly print formats. Complete with your logo, bank accounts, signature, and QR code!"}
-            </h4>
+                  {/* TABLET MOCKUP */}
+                  {featureDeviceMap(selectedFeatureIdx) === "tablet" && (
+                    <div className="w-full max-w-xl mx-auto flex justify-center">
+                      <div className="bg-slate-950 p-4 rounded-[32px] w-[80%] aspect-[4/3] border-4 border-slate-800 shadow-2xl relative">
+                        <div className="absolute top-1/2 -left-1 w-1 h-10 bg-slate-700 rounded-r-md" />
+                        <div className="w-full h-full bg-slate-850 rounded-2xl overflow-hidden">
+                          <img 
+                            src={IMAGES.billing} 
+                            alt="Tablet billing" 
+                            className="w-full h-full object-cover" 
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* MOBILE / INVOICE MOCKUP */}
+                  {featureDeviceMap(selectedFeatureIdx) === "mobile" && (
+                    <div className="w-full max-w-sm mx-auto flex justify-center">
+                      <div className="bg-white text-slate-900 border border-slate-100 rounded-3xl p-3 shadow-2xl w-full">
+                        <div className="flex items-center justify-between px-3 py-2 border-b border-slate-100 mb-2">
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-2.5 h-2.5 bg-rose-500 rounded-full" />
+                            <span className="w-2.5 h-2.5 bg-amber-400 rounded-full" />
+                            <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full" />
+                          </div>
+                          <span className="text-[10px] font-bold font-mono tracking-wider text-slate-400 uppercase">INVOICE</span>
+                          <a href={IMAGES.invoice} target="_blank" className="p-1 rounded-md text-slate-400 hover:text-indigo-600 transition-colors" rel="noreferrer">
+                            <ArrowUpRight className="w-4 h-4" />
+                          </a>
+                        </div>
+                        <div className="rounded-xl overflow-hidden border border-slate-200 aspect-[3/4]">
+                          <img 
+                            src={IMAGES.invoice} 
+                            alt="Invoice Format" 
+                            className="w-full h-full object-cover" 
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Animated Caption */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedFeatureIdx}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25, ease: "easeInOut" }}
+                  className="text-center mt-8 max-w-2xl mx-auto"
+                >
+                  <h4 className="font-semibold text-slate-300 text-sm leading-relaxed">
+                    <span className="text-indigo-400 font-bold">{FEATURES_DATA[selectedFeatureIdx]?.title}:</span>{" "}
+                    {FEATURES_DATA[selectedFeatureIdx]?.description}
+                  </h4>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
           </div>
 
         </div>
@@ -1006,127 +1043,9 @@ export default function App() {
       </section>
 
 
-      {/* PRICING & LIFE-TIME PURCHASE */}
-      <section id="pricing" className="py-20 md:py-28 bg-transparent relative overflow-hidden">
-        <div className="absolute top-1/4 left-0 w-80 h-80 bg-gradient-to-tr from-blue-300/10 via-transparent to-transparent blur-3xl rounded-full" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          <ScrollReveal direction="up" delay={0.05} duration={0.65}>
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="text-xs font-bold tracking-widest text-indigo-600 font-mono uppercase bg-indigo-50 px-3 py-1 rounded-full">
-                PRICING PLANS
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-black font-display text-slate-900 mt-3 tracking-tight">
-                Simple Plans, Tremendous Rewards
-              </h2>
-              <p className="text-slate-500 mt-2 text-sm sm:text-base">
-                Try Vyaparix absolutely free for 7 days. Upgrade to the 3-year plan when you're ready for long-term savings.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch max-w-4xl mx-auto">
-            
-            {/* Plan 1: Free Trial */}
-            <ScrollReveal direction="up" delay={0.1} duration={0.7} className="flex">
-              <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 hover:border-slate-300 shadow-md hover:shadow-lg transition-all flex flex-col justify-between w-full">
-                <div>
-                  <span className="text-xs font-bold font-mono text-slate-400 bg-slate-100 px-3 py-1.5 rounded-md uppercase tracking-wider">
-                    FREE
-                  </span>
-                  <h3 className="text-2xl font-bold font-display text-slate-900 mt-3">7-Day Free Trial</h3>
-                  <p className="text-slate-500 text-sm mt-1.5">Test drive all software features before making any commitment.</p>
-
-                  <div className="my-8">
-                    <span className="text-5xl font-black font-display text-slate-900">₹0</span>
-                    <span className="text-slate-400 text-sm font-medium ml-2">for 7 Days</span>
-                  </div>
-
-                  <ul className="text-sm space-y-3.5 text-slate-600 border-t border-slate-100 pt-7">
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4.5 h-4.5 text-emerald-500 shrink-0" />
-                      <span>Generate Unlimited Tax Invoices</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4.5 h-4.5 text-emerald-500 shrink-0" />
-                      <span>Full Batch Stock Management</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4.5 h-4.5 text-emerald-500 shrink-0" />
-                      <span>WhatsApp Invoice Export links</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4.5 h-4.5 text-emerald-500 shrink-0" />
-                      <span>Export reports in ready Excel sheets</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <button 
-                  onClick={() => setIsLeadModalOpen(true)}
-                  className="w-full mt-10 py-3.5 text-sm font-bold font-display text-indigo-600 border-2 border-indigo-200 hover:border-indigo-500 rounded-xl hover:bg-indigo-50 transition-all cursor-pointer"
-                >
-                  Download Free Trial
-                </button>
-              </div>
-            </ScrollReveal>
-
-            {/* Plan 2: Premium 3-Year */}
-            <ScrollReveal direction="up" delay={0.18} duration={0.7} className="flex">
-              <div className="bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-3xl p-8 sm:p-10 shadow-xl relative flex flex-col justify-between transform md:-translate-y-2 w-full">
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-extrabold font-mono tracking-widest bg-amber-400 text-slate-900 px-4 py-1.5 rounded-full uppercase shadow-lg">
-                  BEST VALUE
-                </span>
-                <div>
-                  <span className="text-xs font-bold font-mono text-indigo-200 bg-white/15 px-3 py-1.5 rounded-md uppercase tracking-wider">
-                    3 YEAR PLAN
-                  </span>
-                  <h3 className="text-2xl font-bold font-display text-white mt-3">Premium 3-Year</h3>
-                  <p className="text-indigo-200 text-sm mt-1.5">Long-term coverage with max savings, priority support & cloud backups.</p>
-
-                  <div className="my-8">
-                    <span className="text-5xl font-black font-display text-white">₹5,999</span>
-                    <span className="text-indigo-200 text-sm font-semibold ml-2">/ 3 years + GST</span>
-                  </div>
-
-                  <ul className="text-sm space-y-3.5 text-indigo-100 border-t border-indigo-500/40 pt-7">
-                    <li className="flex items-center gap-3 font-semibold text-white">
-                      <Check className="w-4.5 h-4.5 text-emerald-300 shrink-0" />
-                      <span>Everything in Trial, plus:</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4.5 h-4.5 text-emerald-300 shrink-0" />
-                      <span>Automatic Google Drive Cloud Sync</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4.5 h-4.5 text-emerald-300 shrink-0" />
-                      <span>Multi-Device Shop Synchronizer</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4.5 h-4.5 text-emerald-300 shrink-0" />
-                      <span>GST summary Excel draft logs</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4.5 h-4.5 text-emerald-300 shrink-0" />
-                      <span>24/7 Telephone Technical Support</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <button 
-                  onClick={() => setIsLeadModalOpen(true)}
-                  className="w-full mt-10 py-3.5 text-sm font-bold font-display text-indigo-700 bg-white hover:bg-indigo-50 rounded-xl shadow-lg cursor-pointer transition-all"
-                >
-                  Get Premium 3-Year Plan
-                </button>
-              </div>
-            </ScrollReveal>
-
-          </div>
-
-        </div>
-      </section>
+      <PricingSection
+            onStartFreeTrial={() => setIsLeadModalOpen(true)}
+          />
 
 
       {/* TESTIMONIALS */}
