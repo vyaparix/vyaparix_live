@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { X, ArrowRight, Building, User, Mail, Phone, MapPin, Sparkles, CheckCircle2 } from "lucide-react";
 import { LeadDetails } from "../types";
 import { motion, AnimatePresence } from "motion/react";
@@ -67,7 +67,7 @@ export default function LeadModal({ isOpen, onClose, onSuccess }: LeadModalProps
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 

@@ -4,6 +4,8 @@ interface ImportMetaEnv {
   readonly VITE_RAZORPAY_KEY_ID: string;
   readonly VITE_GOOGLE_SHEET_WEBHOOK_URL: string;
   readonly VITE_SMTP_API_URL: string;
+  readonly VITE_EXE_DOWNLOAD_URL: string;
+  readonly VITE_WHATSAPP_NUMBER: string;
 }
 
 interface ImportMeta {

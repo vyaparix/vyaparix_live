@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Download, PhoneCall, Check, ArrowLeft, ShieldCheck, Cpu, Smartphone, RefreshCw, MessageSquare } from "lucide-react";
 import { LeadDetails } from "../types";
 import { motion } from "motion/react";

@@ -15,21 +15,14 @@
  * 3. Replace the fields below with your public URL strings (e.g., logo: "https://example.com/my-logo.png")
  */
 
-import defaultLogo from "./assets/images/vyaparix_logo.png";
-import defaultDashboard from "./assets/images/vyaparix_deshboard.png";
-import defaultBilling from "./assets/images/vyaparix_billing_studio.png";
-import defaultInvoice from "./assets/images/vyaparix_invoive.png";
+import defaultLogo from "./assets/images/vyaparix_logo.webp";
+import defaultDashboard from "./assets/images/vyaparix_deshboard.webp";
+import defaultBilling from "./assets/images/vyaparix_billing_studio.webp";
+import defaultInvoice from "./assets/images/vyaparix_invoive.webp";
 
 export const IMAGES = {
-  // 1. App logo icon (Used in header navbar, comparison benefits cards, and footer cols)
   logo: defaultLogo,
-
-  // 2. Dashboard main preview (Used in Hero section background laptop and device showcase laptop tab)
   dashboard: defaultDashboard,
-
-  // 3. Billing Studio interface (Used in device showcase desktop layout, tablet layout, and footer preview)
   billing: defaultBilling,
-
-  // 4. Output invoice page print template format (Used in device showcase mobile live print mockup view)
   invoice: defaultInvoice,
 };

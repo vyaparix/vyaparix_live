@@ -1,8 +1,8 @@
-import React from "react";
 import { motion } from "motion/react";
+import type { ReactNode } from "react";
 
 interface ScrollRevealProps {
-  children: React.ReactNode;
+  children: ReactNode;
   direction?: "up" | "down" | "left" | "right" | "fade";
   delay?: number;
   duration?: number;
