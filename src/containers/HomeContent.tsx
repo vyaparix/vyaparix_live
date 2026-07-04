@@ -261,7 +261,7 @@ export default function HomeContent({ setIsLeadModalOpen, setDemoModalOpen, hand
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollReveal direction="up" delay={0.05} duration={0.6}>
             <div className="text-center mb-8 pointer-events-none">
-              <h3 className="text-xs font-bold font-mono text-indigo-400 uppercase tracking-widest leading-6">TRUSTED BY 10,000+ BUSINESSES ACROSS INDIA</h3>
+              <h3 className="text-xs font-bold font-mono text-indigo-400 uppercase tracking-widest leading-6">TRUSTED BY 1000+ BUSINESSES ACROSS INDIA</h3>
             </div>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.1} duration={0.6}>
@@ -607,7 +607,7 @@ export default function HomeContent({ setIsLeadModalOpen, setDemoModalOpen, hand
               </div>
               <div className="bg-purple-50/70 backdrop-blur-sm rounded-2xl p-6 border border-purple-100/60">
                 <h4 className="font-bold font-display text-slate-900 text-base">India's #1 Offline Billing Software</h4>
-                <p className="text-xs text-slate-500 mt-1">Vyaparix is trusted by 10,000+ businesses across India. GST-ready, offline-first, and unlimited invoices.</p>
+                <p className="text-xs text-slate-500 mt-1">Vyaparix is trusted by  businesses across India. GST-ready, offline-first, and unlimited invoices.</p>
               </div>
             </ScrollReveal>
             <ScrollReveal direction="left" delay={0.18} duration={0.7} className="lg:col-span-3">
