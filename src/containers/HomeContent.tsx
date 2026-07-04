@@ -5,7 +5,7 @@ import {
   Store, Stethoscope, ShoppingBag, Laptop, Shirt, Wrench, Utensils, Truck,
   Phone, Mail, ChevronDown, ChevronUp, Star, Play, ArrowRight, Shield,
   Zap, Sparkles, Download, Check, X, Menu, FileText, Clock,
-  ArrowUpRight, CheckCircle, Heart
+  ArrowUpRight, CheckCircle, Heart, LayoutDashboard
 } from "lucide-react";
 import {
   TRUSTED_BUSINESSES, TRUST_STATS, FEATURES_DATA, INDUSTRIES_DATA,
@@ -16,7 +16,7 @@ import LeadModal, { INDIAN_STATES, BUSINESS_TYPES } from "../components/LeadModa
 import ScrollReveal from "../components/ScrollReveal";
 import PricingSection from "../components/PricingSection";
 import { motion, AnimatePresence } from "motion/react";
-import { IMAGES } from "../imageConfig";
+import { IMAGES, FEATURE_IMAGES } from "../imageConfig";
 import ThankYouView from "../components/ThankYouView";
 
 interface HomeContentProps {
@@ -53,6 +53,7 @@ const getFeatureIcon = (name: string, className = "w-5 h-5") => {
     case "Printer": return <Printer className={className} />;
     case "BarChart3": return <BarChart3 className={className} />;
     case "Award": return <Award className={className} />;
+    case "LayoutDashboard": return <LayoutDashboard className={className} />;
     default: return <ReceiptText className={className} />;
   }
 };
@@ -71,7 +72,7 @@ const featureDeviceMap = (idx: number): "laptop" | "desktop" | "tablet" | "mobil
 export default function HomeContent({ setIsLeadModalOpen, setDemoModalOpen, handleLeadSuccess }: HomeContentProps) {
   const [currentView, setCurrentView] = useState<"landing" | "thankyou">("landing");
   const [submittedLead, setSubmittedLead] = useState<LeadDetails | null>(null);
-  const [selectedFeatureIdx, setSelectedFeatureIdx] = useState(1);
+  const [selectedFeatureIdx, setSelectedFeatureIdx] = useState(12);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [statsCounters, setStatsCounters] = useState({ invoices: "1,000+", accuracy: "95%" });
@@ -372,18 +373,18 @@ export default function HomeContent({ setIsLeadModalOpen, setDemoModalOpen, hand
             </div>
           </ScrollReveal>
           <div className="flex flex-col gap-6">
-            <div className="inline-flex bg-slate-800/40 backdrop-blur-sm border border-slate-700/40 rounded-xl p-1 shadow-xl shadow-black/20 mx-auto">
-              <div className="flex gap-1">
-                  {FEATURES_DATA.filter(f => ["Inventory Management","Purchase Management","Customer Ledger","WhatsApp Automation","Sales Reports","Stock Alerts","Invoice Printing"].includes(f.title)).map((feat, idx) => {
+            <div className="w-full max-w-full md:max-w-none overflow-x-auto overflow-y-hidden scrollbar-none md:overflow-visible bg-slate-800/40 backdrop-blur-sm border border-slate-700/40 rounded-xl p-1 shadow-xl shadow-black/20 md:mx-auto md:w-auto">
+              <div className="flex gap-1 w-max md:w-auto md:flex-wrap md:justify-center">
+                  {FEATURES_DATA.filter(f => ["Dashboard Overview","Billing Studio","Inventory Management","Purchase Management","Customer Ledger","WhatsApp Automation","Sales Reports","Stock Alerts","Invoice Printing"].includes(f.title)).map((feat, idx) => {
                     const originalIdx = FEATURES_DATA.findIndex(f => f.title === feat.title);
                     return (
                     <button key={feat.title} type="button" onClick={() => setSelectedFeatureIdx(originalIdx)}
-                      className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-left transition-all duration-200 group whitespace-nowrap ${selectedFeatureIdx === originalIdx ? "bg-gradient-to-r from-indigo-600/20 to-indigo-600/5 border border-indigo-500/40 shadow-lg shadow-indigo-500/10" : "bg-transparent border border-transparent hover:bg-slate-700/30"}`}>
-                      <span className={`shrink-0 p-1 rounded-lg transition-all duration-200 ${selectedFeatureIdx === originalIdx ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/30" : "bg-slate-700 text-slate-400 group-hover:bg-slate-600 group-hover:text-slate-200"}`}>{getFeatureIcon(feat.iconName, "w-3 h-3")}</span>
-                      <div className="min-w-0">
+                      className={`flex items-center gap-1.5 px-2 md:px-2.5 py-1.5 rounded-lg text-left transition-all duration-200 group whitespace-nowrap ${selectedFeatureIdx === originalIdx ? "bg-gradient-to-r from-indigo-600/20 to-indigo-600/5 border border-indigo-500/40 shadow-lg shadow-indigo-500/10" : "bg-transparent border border-transparent hover:bg-slate-700/30"}`}>
+                      <span className={`shrink-0 p-1 rounded-lg transition-all duration-200 ${selectedFeatureIdx === originalIdx ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/30" : "bg-slate-700 text-slate-400 group-hover:bg-slate-600 group-hover:text-slate-200"}`}>{getFeatureIcon(feat.iconName, "w-4 h-4 md:w-3 md:h-3")}</span>
+                      <div className="min-w-0 hidden md:block">
                         <span className={`text-[11px] font-semibold font-display block truncate transition-colors ${selectedFeatureIdx === originalIdx ? "text-white" : "text-slate-300 group-hover:text-white"}`}>{feat.title}</span>
                       </div>
-                      {feat.badge && <span className="text-[7px] font-bold font-mono tracking-wider px-1 py-0.5 rounded bg-gradient-to-r from-amber-500/20 to-amber-500/10 text-amber-300 border border-amber-500/25 uppercase shrink-0">{feat.badge}</span>}
+                      {feat.badge && <span className="text-[7px] font-bold font-mono tracking-wider px-1 py-0.5 rounded bg-gradient-to-r from-amber-500/20 to-amber-500/10 text-amber-300 border border-amber-500/25 uppercase shrink-0 hidden md:inline">{feat.badge}</span>}
                     </button>
                     );
                   })}
@@ -399,16 +400,18 @@ export default function HomeContent({ setIsLeadModalOpen, setDemoModalOpen, hand
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                       className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-400/5 to-transparent pointer-events-none rounded-2xl z-10"
                     />
-                    <div className="aspect-[16/10] bg-slate-800 rounded-lg overflow-hidden relative">
-                      <motion.img src={IMAGES.dashboard} alt="Vyaparix dashboard"
-                        className="absolute inset-0 w-full h-full object-fill" referrerPolicy="no-referrer" loading="lazy"
-                        animate={{ opacity: selectedFeatureIdx < 6 ? 1 : 0 }}
-                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }} />
-                      <motion.img src={IMAGES.billing} alt="Vyaparix billing studio"
-                        className="absolute inset-0 w-full h-full object-fill" referrerPolicy="no-referrer" loading="lazy"
-                        animate={{ opacity: selectedFeatureIdx >= 6 ? 1 : 0 }}
-                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }} />
-                    </div>
+              <div className="aspect-[16/10] bg-slate-800 rounded-lg overflow-hidden relative">
+                <motion.img
+                  key={selectedFeatureIdx}
+                  src={FEATURE_IMAGES[FEATURES_DATA[selectedFeatureIdx]?.title] || IMAGES.dashboard}
+                  alt={FEATURES_DATA[selectedFeatureIdx]?.title}
+                  className="absolute inset-0 w-full h-full object-fill"
+                  referrerPolicy="no-referrer" loading="lazy"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                />
+              </div>
                   </div>
                   <div className="h-4 w-[104%] -ml-[2%] bg-gradient-to-r from-slate-800 via-slate-600 to-slate-800 rounded-b-xl border-b-2 border-slate-950 relative z-10" />
                   <motion.div

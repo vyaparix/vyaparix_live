@@ -1,28 +1,29 @@
-/**
- * Vyaparix Asset Configuration File
- * 
- * Here you can easily configure and change the images used throughout your website.
- * You can set your custom images in one of TWO ways:
- * 
- * METHOD 1: LOCAL IMAGES (Upload files via Sidebar)
- * 1. Click on the file explorer sidebar or settings in AI Studio.
- * 2. Upload your images (e.g. logo, dashboard, billing screenshot) to the path: `/src/assets/images/`
- * 3. Import them below and assign them to the respective fields in the IMAGES object.
- * 
- * METHOD 2: ONLINE IMAGES (No upload required)
- * 1. Upload your photos to any public cloud storage or image host (Imgur, PostImages, direct Google Drive, etc.)
- * 2. Copy the public "direct link" of the image (it should end in .png, .jpg, or .jpeg)
- * 3. Replace the fields below with your public URL strings (e.g., logo: "https://example.com/my-logo.png")
- */
-
 import defaultLogo from "./assets/images/vyaparix_logo.webp";
 import defaultDashboard from "./assets/images/vyaparix_deshboard.webp";
 import defaultBilling from "./assets/images/vyaparix_billing_studio.webp";
-import defaultInvoice from "./assets/images/vyaparix_invoive.webp";
+
+import inventoryMgmt from "./assets/images/Inventory Management.png";
+import purchaseMgmt from "./assets/images/Purchase Management.png";
+import customerLedger from "./assets/images/Customer Ledger.png";
+import whatsappIntegration from "./assets/images/Whatsapp intigration.png";
+import salesReports from "./assets/images/sale repoer .png";
+import invoicePrint from "./assets/images/print.png";
+import stockAlerts from "./assets/images/stock Alert.png";
 
 export const IMAGES = {
   logo: defaultLogo,
   dashboard: defaultDashboard,
   billing: defaultBilling,
-  invoice: defaultInvoice,
+};
+
+export const FEATURE_IMAGES: Record<string, string> = {
+  "Inventory Management": inventoryMgmt,
+  "Purchase Management": purchaseMgmt,
+  "Customer Ledger": customerLedger,
+  "WhatsApp Automation": whatsappIntegration,
+  "Sales Reports": salesReports,
+  "Stock Alerts": stockAlerts,
+  "Invoice Printing": invoicePrint,
+  "Dashboard Overview": defaultDashboard,
+  "Billing Studio": defaultBilling,
 };

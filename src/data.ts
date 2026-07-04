@@ -82,6 +82,16 @@ export const FEATURES_DATA: FeatureItem[] = [
     description: "Upload your business logo, choose custom themes and colors, add digital signatures, and configure payment terms. Present a professional branded invoice to every customer with Vyaparix's customization options.",
     iconName: "Award",
   },
+  {
+    title: "Dashboard Overview",
+    description: "Your complete business command center. View real-time sales summaries, outstanding customer balances, low stock warnings, and daily transaction snapshots all on one clean, intuitive dashboard layout.",
+    iconName: "LayoutDashboard",
+  },
+  {
+    title: "Billing Studio",
+    description: "Vyaparix's powerful billing workspace where you create, preview, and print GST invoices in seconds. Access customer ledger, apply discounts, manage items, and send WhatsApp invoices from a single unified billing interface.",
+    iconName: "FileText",
+  },
 ];
 
 export const INDUSTRIES_DATA: IndustryItem[] = [

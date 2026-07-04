@@ -5,6 +5,7 @@ import { LANDING_PAGE_KEYS } from "./pages/landingData";
 import { Play, X, ArrowRight, Zap } from "lucide-react";
 import { LeadDetails } from "./types";
 import LeadModal from "./components/LeadModal";
+import ThankYouView from "./components/ThankYouView";
 import HomeContent from "./containers/HomeContent";
 import { motion, AnimatePresence } from "motion/react";
 import { IMAGES } from "./imageConfig";
@@ -19,10 +20,28 @@ const EulaPage = lazy(() => import("./pages/EulaPage"));
 export default function App() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [demoModalOpen, setDemoModalOpen] = useState(false);
+  const [submittedLead, setSubmittedLead] = useState<LeadDetails | null>(null);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const handleLeadSuccess = (lead: LeadDetails) => {
     setIsLeadModalOpen(false);
+    setSubmittedLead(lead);
+    setShowThankYou(true);
   };
+
+  const handleGoBack = () => {
+    setShowThankYou(false);
+    setSubmittedLead(null);
+  };
+
+  if (showThankYou && submittedLead) {
+    return (
+      <ThankYouView
+        lead={submittedLead}
+        onGoBack={handleGoBack}
+      />
+    );
+  }
 
   return (
     <BrowserRouter>
