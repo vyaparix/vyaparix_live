@@ -2,10 +2,9 @@ import { useState, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import { LANDING_PAGE_KEYS } from "./pages/landingData";
-import { Play, X, ArrowRight, Zap } from "lucide-react";
+import { Play, X, ArrowRight } from "lucide-react";
 import { LeadDetails } from "./types";
 import LeadModal from "./components/LeadModal";
-import ThankYouView from "./components/ThankYouView";
 import HomeContent from "./containers/HomeContent";
 import { motion, AnimatePresence } from "motion/react";
 import { IMAGES } from "./imageConfig";
@@ -20,28 +19,13 @@ const EulaPage = lazy(() => import("./pages/EulaPage"));
 export default function App() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [demoModalOpen, setDemoModalOpen] = useState(false);
-  const [submittedLead, setSubmittedLead] = useState<LeadDetails | null>(null);
-  const [showThankYou, setShowThankYou] = useState(false);
 
-  const handleLeadSuccess = (lead: LeadDetails) => {
-    setIsLeadModalOpen(false);
-    setSubmittedLead(lead);
-    setShowThankYou(true);
+  // Called after data is saved to Google Sheets and download is triggered.
+  // Currently a no-op — kept in case downstream components need it.
+  const handleLeadSuccess = (_lead: LeadDetails) => {
+    // Download is triggered directly inside LeadModal after successful save.
+    // Nothing extra needed here.
   };
-
-  const handleGoBack = () => {
-    setShowThankYou(false);
-    setSubmittedLead(null);
-  };
-
-  if (showThankYou && submittedLead) {
-    return (
-      <ThankYouView
-        lead={submittedLead}
-        onGoBack={handleGoBack}
-      />
-    );
-  }
 
   return (
     <BrowserRouter>
@@ -70,7 +54,11 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
-      <LeadModal isOpen={isLeadModalOpen} onClose={() => setIsLeadModalOpen(false)} onSuccess={handleLeadSuccess} />
+      <LeadModal
+        isOpen={isLeadModalOpen}
+        onClose={() => setIsLeadModalOpen(false)}
+        onSuccess={handleLeadSuccess}
+      />
 
       <AnimatePresence>
         {demoModalOpen && (

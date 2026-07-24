@@ -332,10 +332,10 @@ export default function HomeContent({ setIsLeadModalOpen, setDemoModalOpen, hand
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="text-xs font-bold tracking-widest text-indigo-600 font-mono uppercase bg-indigo-50 px-3 py-1 rounded-full">TAILORED VERTICALS</span>
               <h2 className="text-3xl sm:text-4xl font-black font-display text-slate-900 mt-3 tracking-tight">Pre-configured Workflows For Your Exact Trade</h2>
-              <p className="text-slate-500 mt-2 text-sm sm:text-base">Vyaparix implements specific settings uniquely tuned for wholesalers, pharmacies, hardware shops, boutiques, and more.</p>
+              <p className="text-slate-500 mt-2 text-sm sm:text-base">Vyaparix implements specific settings uniquely tuned for wholesalers, kirana stores, hardware shops, boutiques, and more.</p>
             </div>
           </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {INDUSTRIES_DATA.map((ind, idx) => (
               <ScrollReveal key={ind.name} direction="up" delay={idx * 0.06} duration={0.65} className="flex">
                 <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-slate-200/60 hover:border-indigo-300 shadow-sm hover:shadow-lg hover:bg-white transition-all p-6 flex flex-col justify-between w-full">

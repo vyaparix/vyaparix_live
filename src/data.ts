@@ -4,7 +4,6 @@ export const TRUSTED_BUSINESSES = [
   "Retail Stores",
   "Wholesalers",
   "Hardware Businesses",
-  "Medical Stores",
   "Grocery Stores",
   "Electronics Shops",
   "Garment Stores",
@@ -105,16 +104,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     ],
     iconName: "Store",
   },
-  {
-    name: "Medical",
-    description: "Pharmacies, drugstores, and medical distributors requiring strict drug license tracing and batch-wise inventory management.",
-    benefits: [
-      "Batch-wise inventory with manufacturing and expiry date tracking",
-      "Auto-alerts for expiring medicines and pharmaceutical drugs",
-      "Complete GST reports for pharmaceutical products and HSN codes",
-    ],
-    iconName: "Stethoscope",
-  },
+
   {
     name: "Grocery",
     description: "Kirana shops, bulk food marts, and dry fruit retail outlets needing flexible weight-based billing and inventory tracking.",
@@ -155,16 +145,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     ],
     iconName: "Wrench",
   },
-  {
-    name: "Restaurant",
-    description: "Cafes, bakeries, fast-food counters, and fine dining outlets managing high-volume orders with diverse menu items.",
-    benefits: [
-      "Quick Kitchen Order Tickets (KOT) printouts for the kitchen staff",
-      "Dynamic GST split (5% for food vs 18% for packaged items)",
-      "Payment mode recording (cash, card, UPI) on every invoice",
-    ],
-    iconName: "Utensils",
-  },
+
   {
     name: "Wholesale",
     description: "B2B wholesale distributors and stockists handling massive transaction volumes with bulk pricing and credit management.",
@@ -212,10 +193,10 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
   {
     id: 1,
     name: "Rajesh Patel",
-    role: "Founder, Patel Drug House",
-    businessName: "Medical Store, Ahmedabad",
+    role: "Owner, Patel Kirana Mart",
+    businessName: "Grocery Store, Ahmedabad",
     rating: 5,
-    text: "Switched to Vyaparix for our medical retail store, and it completely streamlined our pharmacy bills. The batch-wise stock alert tells us exactly which medicines are expiring next month. Saved more than ₹25,000 in expired losses already. Best billing software in India!",
+    text: "Switched to Vyaparix for our kirana store and it completely transformed how we manage daily billing. The barcode scanning and real-time stock updates save us hours every day. WhatsApp invoices to customers have improved our payment collection by 40%. Best billing software in India!",
   },
   {
     id: 2,
