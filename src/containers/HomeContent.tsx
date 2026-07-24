@@ -154,7 +154,7 @@ export default function HomeContent({ setIsLeadModalOpen, setDemoModalOpen, hand
                     <Sparkles className="w-3.5 h-3.5" /> High-Performance Windows Desktop Billing Client
                   </span>
                   <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-black font-display tracking-tight leading-none text-slate-900 mt-4">
-                    India's Smartest <br/><span className="gradient-text">Billing & Inventory</span> <br/> Software
+                    India's Smartest <br /><span className="gradient-text">Billing & Inventory</span> <br /> Software
                   </h1>
                   <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-sans mt-6">
                     India's best GST billing software and inventory management for retailers, wholesalers, and MSMEs. Generate GST invoices, manage stock, send WhatsApp invoices, and analyze business reports from one fast desktop app.
@@ -265,11 +265,11 @@ export default function HomeContent({ setIsLeadModalOpen, setDemoModalOpen, hand
             </div>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.1} duration={0.6}>
-          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-xs font-semibold font-display tracking-wider text-slate-400 border-b border-slate-800 pb-8 select-none">
-            {TRUSTED_BUSINESSES.map((biz) => (
-              <span key={biz} className="bg-slate-800/80 px-4 py-2 rounded-lg hover:text-white transition-colors">• {biz}</span>
-            ))}
-          </div>
+            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-xs font-semibold font-display tracking-wider text-slate-400 border-b border-slate-800 pb-8 select-none">
+              {TRUSTED_BUSINESSES.map((biz) => (
+                <span key={biz} className="bg-slate-800/80 px-4 py-2 rounded-lg hover:text-white transition-colors">• {biz}</span>
+              ))}
+            </div>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.15} duration={0.7}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8">
@@ -375,9 +375,9 @@ export default function HomeContent({ setIsLeadModalOpen, setDemoModalOpen, hand
           <div className="flex flex-col gap-6">
             <div className="w-full max-w-full md:max-w-none overflow-x-auto overflow-y-hidden scrollbar-none md:overflow-visible bg-slate-800/40 backdrop-blur-sm border border-slate-700/40 rounded-xl p-1 shadow-xl shadow-black/20 md:mx-auto md:w-auto">
               <div className="flex gap-1 w-max md:w-auto md:flex-wrap md:justify-center">
-                  {FEATURES_DATA.filter(f => ["Dashboard Overview","Billing Studio","Inventory Management","Purchase Management","Customer Ledger","WhatsApp Automation","Sales Reports","Stock Alerts","Invoice Printing"].includes(f.title)).map((feat, idx) => {
-                    const originalIdx = FEATURES_DATA.findIndex(f => f.title === feat.title);
-                    return (
+                {FEATURES_DATA.filter(f => ["Dashboard Overview", "Billing Studio", "Inventory Management", "Purchase Management", "Customer Ledger", "WhatsApp Automation", "Sales Reports", "Stock Alerts", "Invoice Printing"].includes(f.title)).map((feat, idx) => {
+                  const originalIdx = FEATURES_DATA.findIndex(f => f.title === feat.title);
+                  return (
                     <button key={feat.title} type="button" onClick={() => setSelectedFeatureIdx(originalIdx)}
                       className={`flex items-center gap-1.5 px-2 md:px-2.5 py-1.5 rounded-lg text-left transition-all duration-200 group whitespace-nowrap ${selectedFeatureIdx === originalIdx ? "bg-gradient-to-r from-indigo-600/20 to-indigo-600/5 border border-indigo-500/40 shadow-lg shadow-indigo-500/10" : "bg-transparent border border-transparent hover:bg-slate-700/30"}`}>
                       <span className={`shrink-0 p-1 rounded-lg transition-all duration-200 ${selectedFeatureIdx === originalIdx ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/30" : "bg-slate-700 text-slate-400 group-hover:bg-slate-600 group-hover:text-slate-200"}`}>{getFeatureIcon(feat.iconName, "w-4 h-4 md:w-3 md:h-3")}</span>
@@ -386,10 +386,10 @@ export default function HomeContent({ setIsLeadModalOpen, setDemoModalOpen, hand
                       </div>
                       {feat.badge && <span className="text-[7px] font-bold font-mono tracking-wider px-1 py-0.5 rounded bg-gradient-to-r from-amber-500/20 to-amber-500/10 text-amber-300 border border-amber-500/25 uppercase shrink-0 hidden md:inline">{feat.badge}</span>}
                     </button>
-                    );
-                  })}
-                  </div>
+                  );
+                })}
               </div>
+            </div>
             <div className="flex-1 min-w-0 w-full">
               <div className="w-full max-w-3xl mx-auto">
                 <div className="relative">
@@ -400,18 +400,18 @@ export default function HomeContent({ setIsLeadModalOpen, setDemoModalOpen, hand
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                       className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-400/5 to-transparent pointer-events-none rounded-2xl z-10"
                     />
-              <div className="aspect-[16/10] bg-slate-800 rounded-lg overflow-hidden relative">
-                <motion.img
-                  key={selectedFeatureIdx}
-                  src={FEATURE_IMAGES[FEATURES_DATA[selectedFeatureIdx]?.title] || IMAGES.dashboard}
-                  alt={FEATURES_DATA[selectedFeatureIdx]?.title}
-                  className="absolute inset-0 w-full h-full object-fill"
-                  referrerPolicy="no-referrer" loading="lazy"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                />
-              </div>
+                    <div className="aspect-[16/10] bg-slate-800 rounded-lg overflow-hidden relative">
+                      <motion.img
+                        key={selectedFeatureIdx}
+                        src={FEATURE_IMAGES[FEATURES_DATA[selectedFeatureIdx]?.title] || IMAGES.dashboard}
+                        alt={FEATURES_DATA[selectedFeatureIdx]?.title}
+                        className="absolute inset-0 w-full h-full object-fill"
+                        referrerPolicy="no-referrer" loading="lazy"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                      />
+                    </div>
                   </div>
                   <div className="h-4 w-[104%] -ml-[2%] bg-gradient-to-r from-slate-800 via-slate-600 to-slate-800 rounded-b-xl border-b-2 border-slate-950 relative z-10" />
                   <motion.div
